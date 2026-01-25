@@ -16,22 +16,22 @@
 
 ## 支持的 AI 编程工具
 
-| tool key | 工具 | skills 目录（相对 `~`） |
-| --- | --- | --- |
-| `cursor` | Cursor | `.cursor/skills` |
-| `claude_code` | Claude Code | `.claude/skills` |
-| `codex` | Codex | `.codex/skills` |
-| `opencode` | OpenCode | `.config/opencode/skill` |
-| `antigravity` | Antigravity | `.gemini/antigravity/skills` |
-| `amp` | Amp | `.config/agents/skills` |
-| `kilo_code` | Kilo Code | `.kilocode/skills` |
-| `roo_code` | Roo Code | `.roo/skills` |
-| `goose` | Goose | `.config/goose/skills` |
-| `gemini_cli` | Gemini CLI | `.gemini/skills` |
-| `github_copilot` | GitHub Copilot | `.copilot/skills` |
-| `clawdbot` | Clawdbot | `.clawdbot/skills` |
-| `droid` | Droid | `.factory/skills` |
-| `windsurf` | Windsurf | `.codeium/windsurf/skills` |
+| tool key | 工具 | skills 目录（相对 `~`） | detect 目录（相对 `~`） |
+| --- | --- | --- | --- |
+| `cursor` | Cursor | `.cursor/skills` | `.cursor` |
+| `claude_code` | Claude Code | `.claude/skills` | `.claude` |
+| `codex` | Codex | `.codex/skills` | `.codex` |
+| `opencode` | OpenCode | `.config/opencode/skill` | `.config/opencode` |
+| `antigravity` | Antigravity | `.gemini/antigravity/skills` | `.gemini/antigravity` |
+| `amp` | Amp | `.config/agents/skills` | `.config/agents` |
+| `kilo_code` | Kilo Code | `.kilocode/skills` | `.kilocode` |
+| `roo_code` | Roo Code | `.roo/skills` | `.roo` |
+| `goose` | Goose | `.config/goose/skills` | `.config/goose` |
+| `gemini_cli` | Gemini CLI | `.gemini/skills` | `.gemini` |
+| `github_copilot` | GitHub Copilot | `.copilot/skills` | `.copilot` |
+| `clawdbot` | Clawdbot | `.clawdbot/skills` | `.clawdbot` |
+| `droid` | Droid | `.factory/skills` | `.factory` |
+| `windsurf` | Windsurf | `.codeium/windsurf/skills` | `.codeium/windsurf` |
 
 完整路径规则与检测逻辑见 [`src-tauri/src/core/tool_adapters/mod.rs`](../src-tauri/src/core/tool_adapters/mod.rs)。
 

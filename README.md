@@ -22,6 +22,25 @@ Design docs:
 
 ![Skills Hub](docs/assets/home-example.png)
 
+## Supported AI Coding Tools
+
+| tool key | Display name | skills dir (relative to `~`) | detect dir (relative to `~`) |
+| --- | --- | --- | --- |
+| `cursor` | Cursor | `.cursor/skills` | `.cursor` |
+| `claude_code` | Claude Code | `.claude/skills` | `.claude` |
+| `codex` | Codex | `.codex/skills` | `.codex` |
+| `opencode` | OpenCode | `.config/opencode/skill` | `.config/opencode` |
+| `antigravity` | Antigravity | `.gemini/antigravity/skills` | `.gemini/antigravity` |
+| `amp` | Amp | `.config/agents/skills` | `.config/agents` |
+| `kilo_code` | Kilo Code | `.kilocode/skills` | `.kilocode` |
+| `roo_code` | Roo Code | `.roo/skills` | `.roo` |
+| `goose` | Goose | `.config/goose/skills` | `.config/goose` |
+| `gemini_cli` | Gemini CLI | `.gemini/skills` | `.gemini` |
+| `github_copilot` | GitHub Copilot | `.copilot/skills` | `.copilot` |
+| `clawdbot` | Clawdbot | `.clawdbot/skills` | `.clawdbot` |
+| `droid` | Droid | `.factory/skills` | `.factory` |
+| `windsurf` | Windsurf | `.codeium/windsurf/skills` | `.codeium/windsurf` |
+
 ## Development
 
 ### Prerequisites
