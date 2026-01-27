@@ -28,6 +28,14 @@ jobs:
           - os: macos-14
             target: aarch64-apple-darwin
             arch: aarch64
+          # Windows x64 (Intel/AMD)
+          - os: windows-2022
+            target: x86_64-pc-windows-msvc
+            arch: x64
+          # Windows on Arm (aarch64)
+          - os: windows-2022
+            target: aarch64-pc-windows-msvc
+            arch: arm64
 
     steps:
       - name: Checkout
@@ -51,10 +59,23 @@ jobs:
         run: rustup target add ${{ matrix.target }}
 
       - name: Install macOS build deps
+        if: matrix.os == 'macos-14'
         shell: bash
         run: |
           set -euxo pipefail
           brew install pkg-config cmake
+
+      - name: Install Windows build deps
+        if: matrix.os == 'windows-2022'
+        shell: bash
+        run: |
+          set -euxo pipefail
+          # Install Strawberry Perl for OpenSSL build (required by openssl-sys)
+          choco install -y strawberryperl
+          # Add Strawberry Perl to PATH
+          export PATH="/c/Strawberry/perl/bin:$PATH"
+          # WebView2 Runtime is pre-installed on windows-2022 runner
+          rustup target add ${{ matrix.target }}
 
       - name: Install frontend deps
         run: npm ci
@@ -70,8 +91,8 @@ jobs:
 
           const raw = (process.env.RAW_KEY || '').trim();
           if (!raw) {
-            console.error('❌ 缺少 Secret：TAURI_SIGNING_PRIVATE_KEY');
-            process.exit(1);
+            console.warn('⚠️ 未配置 TAURI_SIGNING_PRIVATE_KEY，将生成未签名版本');
+            process.exit(0);
           }
 
           const looksLikeBase64 = (s) => /^[A-Za-z0-9+/=]+$/.test(s);
@@ -165,10 +186,14 @@ jobs:
           fi
 
       - name: Build Tauri App (macOS)
+        if: matrix.os == 'macos-14'
         # updater 产物（*.tar.gz/*.sig）是基于 .app bundle 生成的，因此必须包含 app
         shell: bash
         run: |
           set -euo pipefail
+          echo "=== Building Tauri App for macOS ==="
+          echo "Target: ${{ matrix.target }}"
+          echo "Arch: ${{ matrix.arch }}"
           if [ -n "${APPLE_SIGNING_IDENTITY:-}" ]; then
             echo "✅ 使用 APPLE_SIGNING_IDENTITY=$APPLE_SIGNING_IDENTITY 进行签名"
           else
@@ -176,6 +201,23 @@ jobs:
             unset APPLE_SIGNING_IDENTITY
           fi
           npm run tauri:build -- --target ${{ matrix.target }} --bundles app,dmg
+          echo "=== Build completed ==="
+          ls -la src-tauri/target/${{ matrix.target }}/release/bundle/ || true
+
+      - name: Build Tauri App (Windows)
+        if: matrix.os == 'windows-2022'
+        # Windows 产物：只生成 NSIS 安装程序
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "=== Building Tauri App for Windows ==="
+          echo "Target: ${{ matrix.target }}"
+          echo "Arch: ${{ matrix.arch }}"
+          # Add Strawberry Perl to PATH for OpenSSL build
+          export PATH="/c/Strawberry/perl/bin:$PATH"
+          npm run tauri:build -- --target ${{ matrix.target }} --bundles nsis --no-sign
+          echo "=== Build completed ==="
+          ls -la src-tauri/target/${{ matrix.target }}/release/bundle/ || true
 
       - name: Verify codesign (optional)
         shell: bash
@@ -196,6 +238,7 @@ jobs:
           codesign --verify --deep --strict --verbose=4 "$APP_PATH"
 
       - name: Prepare macOS Assets
+        if: matrix.os == 'macos-14'
         shell: bash
         run: |
           set -euo pipefail
@@ -249,6 +292,45 @@ jobs:
           else
             echo "⚠️ 未找到 macOS .dmg（可选）" >&2
           fi
+
+      - name: Prepare Windows Assets
+        if: matrix.os == 'windows-2022'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p release-assets
+          VERSION="${GITHUB_REF_NAME}" # e.g. v0.1.4
+          ARCH="${{ matrix.arch }}"
+          TARGET="${{ matrix.target }}"
+
+          # 产物路径在不同 target 下可能不同：优先 target/<triple>/...，兜底 target/release/...
+          BUNDLE_DIRS=(
+            "src-tauri/target/${TARGET}/release/bundle"
+            "src-tauri/target/release/bundle"
+          )
+
+          EXE=""
+          for dir in "${BUNDLE_DIRS[@]}"; do
+            if [ -d "${dir}" ]; then
+              if [ -z "${EXE}" ]; then
+                EXE="$(find "${dir}" -type f -name "*.exe" | head -n 1 || true)"
+              fi
+            fi
+          done
+
+          if [ -z "${EXE}" ]; then
+            echo "❌ 未找到 *.exe 安装程序（target=${TARGET}, arch=${ARCH}）。请确认构建包含 `--bundles nsis`。" >&2
+            for dir in "${BUNDLE_DIRS[@]}"; do
+              echo "---- list: ${dir}" >&2
+              ls -la "${dir}" 2>/dev/null || true
+              find "${dir}" -maxdepth 6 -type f 2>/dev/null | head -n 200 >&2 || true
+            done
+            exit 1
+          fi
+
+          NEW_EXE="Skills-Hub-${VERSION}-Windows-${ARCH}.exe"
+          cp "${EXE}" "release-assets/${NEW_EXE}"
 
       - name: List prepared assets
         shell: bash
@@ -348,7 +430,9 @@ jobs:
           node scripts/extract-changelog.mjs "$TAG" CHANGELOG.md > release-notes.md
           {
             echo
-            echo '**⚠️ Install Note:** macOS Gatekeeper workaround (only needed on some macOS versions): `xattr -cr "/Applications/Skills Hub.app"` (https://v2.tauri.app/distribute/#macos).'
+            echo '**Windows Note:** Windows SmartScreen may show a warning during installation. This is normal for unsigned executables. The application is safe to use.'
+            echo
+            echo '**macOS Note:** macOS Gatekeeper workaround (only needed on some macOS versions): `xattr -cr "/Applications/Skills Hub.app"` (https://v2.tauri.app/distribute/#macos).'
           } >> release-notes.md
 
       - name: Create/Update GitHub Release

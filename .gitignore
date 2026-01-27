@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .cursor
+.trae
 
 # Editor directories and files
 .vscode/*
