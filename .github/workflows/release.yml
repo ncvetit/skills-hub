@@ -200,7 +200,7 @@ jobs:
             echo "ℹ️ 未配置 APPLE_SIGNING_IDENTITY，构建未签名版本"
             unset APPLE_SIGNING_IDENTITY
           fi
-          npm run tauri:build -- --target ${{ matrix.target }} --bundles app,dmg --no-sign
+          npm run tauri:build -- --target ${{ matrix.target }} --bundles app,dmg
           echo "=== Build completed ==="
           ls -la src-tauri/target/${{ matrix.target }}/release/bundle/ || true
 
