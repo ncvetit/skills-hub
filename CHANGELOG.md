@@ -3,12 +3,6 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-### Added
-- Local skill import now supports Git-aligned multi-skill discovery, with a pick list and per-item validity reasons for invalid SKILL.md entries.
-- New local import commands: list local candidates and install a selected subpath, with SKILL.md validation.
-
-### Changed
-- Local import flow now scans candidates first; single valid candidate installs directly, multi-candidate opens selection.
 
 ## [0.2.0] - 2026-02-01
 
