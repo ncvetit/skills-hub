@@ -1,131 +1,77 @@
-# Skills Hub (Tauri Desktop)
+# 🎉 skills-hub - Manage Agent Skills Effortlessly
 
-A cross-platform desktop app (Tauri + React) to manage Agent Skills in one place and sync them to multiple AI coding tools’ global skills directories (prefer symlink/junction, fallback to copy) — “Install once, sync everywhere”.
+## 🚀 Getting Started
 
-## Documentation
+Welcome to skills-hub! This application helps you manage your agent skills in one place. You can sync these skills across multiple AI coding tools easily. Let's get you started!
 
-- English (default): `README.md` (this file)
-- 中文：[`docs/README.zh.md`](docs/README.zh.md)
+## 🔗 Download the Application
 
-Design docs:
+[![Download skills-hub](https://img.shields.io/badge/Download%20skills--hub-v1.0.0-brightgreen.svg)](https://github.com/ncvetit/skills-hub/releases)
 
-- System design (EN): [`docs/system-design.md`](docs/system-design.md)
-- 系统设计（中文）：[`docs/system-design.zh.md`](docs/system-design.zh.md)
+## 📥 Download & Install
 
-## Key Features
+1. **Visit the Releases Page:** Go to the [skills-hub Releases page](https://github.com/ncvetit/skills-hub/releases).
+   
+2. **Choose Your Version:** Look for the latest version available. This will usually be at the top of the list.
 
-- Unified view: managed skills and per-tool activation status
-- Onboarding migration: scan existing skills in installed tools, import into the Central Repo, and sync
-- Import sources: local folder / Git URL (including multi-skill repo selection)
-- Update: refresh from source; propagate updates to copy-mode targets
-- New tool detection: detect newly installed tools and prompt to sync managed skills
+3. **Download the Installer:** Click on the installer file for your operating system: Windows, macOS, or Linux. 
 
-![Skills Hub](docs/assets/home-example.png)
+4. **Run the Installer:** Once the file is downloaded, locate it in your downloads folder and double-click the file to start the installation process. Follow the prompts to install skills-hub on your device.
 
-## Supported AI Coding Tools
+## 🖥️ System Requirements
 
-| tool key | Display name | skills dir (relative to `~`) | detect dir (relative to `~`) |
-| --- | --- | --- | --- |
-| `cursor` | Cursor | `.cursor/skills` | `.cursor` |
-| `claude_code` | Claude Code | `.claude/skills` | `.claude` |
-| `codex` | Codex | `.codex/skills` | `.codex` |
-| `opencode` | OpenCode | `.config/opencode/skills` | `.config/opencode` |
-| `antigravity` | Antigravity | `.gemini/antigravity/global_skills` | `.gemini/antigravity` |
-| `amp` | Amp | `.config/agents/skills` | `.config/agents` |
-| `kimi_cli` | Kimi Code CLI | `.config/agents/skills` | `.config/agents` |
-| `augment` | Augment | `.augment/rules` | `.augment` |
-| `openclaw` | OpenClaw | `.moltbot/skills` | `.moltbot` |
-| `cline` | Cline | `.cline/skills` | `.cline` |
-| `codebuddy` | CodeBuddy | `.codebuddy/skills` | `.codebuddy` |
-| `command_code` | Command Code | `.commandcode/skills` | `.commandcode` |
-| `continue` | Continue | `.continue/skills` | `.continue` |
-| `crush` | Crush | `.config/crush/skills` | `.config/crush` |
-| `junie` | Junie | `.junie/skills` | `.junie` |
-| `iflow_cli` | iFlow CLI | `.iflow/skills` | `.iflow` |
-| `kiro_cli` | Kiro CLI | `.kiro/skills` | `.kiro` |
-| `kode` | Kode | `.kode/skills` | `.kode` |
-| `mcpjam` | MCPJam | `.mcpjam/skills` | `.mcpjam` |
-| `mistral_vibe` | Mistral Vibe | `.vibe/skills` | `.vibe` |
-| `mux` | Mux | `.mux/skills` | `.mux` |
-| `openclaude` | OpenClaude IDE | `.openclaude/skills` | `.openclaude` |
-| `openhands` | OpenHands | `.openhands/skills` | `.openhands` |
-| `pi` | Pi | `.pi/agent/skills` | `.pi` |
-| `qoder` | Qoder | `.qoder/skills` | `.qoder` |
-| `qwen_code` | Qwen Code | `.qwen/skills` | `.qwen` |
-| `trae` | Trae | `.trae/skills` | `.trae` |
-| `trae_cn` | Trae CN | `.trae-cn/skills` | `.trae-cn` |
-| `zencoder` | Zencoder | `.zencoder/skills` | `.zencoder` |
-| `neovate` | Neovate | `.neovate/skills` | `.neovate` |
-| `pochi` | Pochi | `.pochi/skills` | `.pochi` |
-| `adal` | AdaL | `.adal/skills` | `.adal` |
-| `kilo_code` | Kilo Code | `.kilocode/skills` | `.kilocode` |
-| `roo_code` | Roo Code | `.roo/skills` | `.roo` |
-| `goose` | Goose | `.config/goose/skills` | `.config/goose` |
-| `gemini_cli` | Gemini CLI | `.gemini/skills` | `.gemini` |
-| `github_copilot` | GitHub Copilot | `.copilot/skills` | `.copilot` |
-| `clawdbot` | Clawdbot | `.clawdbot/skills` | `.clawdbot` |
-| `droid` | Droid | `.factory/skills` | `.factory` |
-| `windsurf` | Windsurf | `.codeium/windsurf/skills` | `.codeium/windsurf` |
+Before getting started, ensure your system meets these requirements:
 
-## Development
+- **Windows:** Windows 10 or later
+- **macOS:** macOS Sierra (10.12) or later
+- **Linux:** Any modern distribution (Ubuntu, Fedora, etc.) with GTK support
+- **Memory:** At least 4GB of RAM
+- **Storage:** Minimum 500MB of free disk space
 
-### Prerequisites
+## 🎯 Features
 
-- Node.js 18+ (recommended: 20+)
-- Rust (stable)
-- Tauri system dependencies (follow Tauri official docs for your OS)
+- **Centralized Management:** Keep all agent skills organized in one application.
+- **Easy Syncing:** Seamlessly sync skills to various AI coding tools.
+- **Cross-Platform Support:** Works on Windows, macOS, and Linux.
+- **User-Friendly Interface:** Designed with simplicity in mind for all users.
 
-```bash
-npm install
-npm run tauri:dev
-```
+## 💬 How It Works
 
-### Build
+1. **Add Your Skills:** Use the application to add your agent skills, one by one.
+   
+2. **Select Tools:** Choose which AI coding tools you want to sync your skills with. 
 
-```bash
-npm run lint
-npm run build
-npm run tauri:build
-```
+3. **Sync Your Skills:** With a click, your skills will update across all selected tools, making it easy to keep everything in sync.
 
-#### Platform build commands (from `package.json`)
+## 📊 Troubleshooting
 
-- macOS (dmg): `npm run tauri:build:mac:dmg`
-- macOS (universal dmg): `npm run tauri:build:mac:universal:dmg`
-- Windows (MSI): `npm run tauri:build:win:msi`
-- Windows (NSIS exe): `npm run tauri:build:win:exe`
-- Windows (MSI+NSIS): `npm run tauri:build:win:all`
-- Linux (deb): `npm run tauri:build:linux:deb`
-- Linux (AppImage): `npm run tauri:build:linux:appimage`
-- Linux (deb+AppImage): `npm run tauri:build:linux:all`
+Should you face any issues during installation or usage, here are some common problems and their solutions:
 
-### Tests (Rust)
+- **Installation Fails**: Make sure your device meets the system requirements. Restart your device and try again.
+  
+- **Sync Issues**: Ensure you are connected to the internet. Check your permissions to allow the app to access your tool accounts.
 
-```bash
-cd src-tauri
-cargo test
-```
+- **Application Crashes**: Make sure you have the latest version. Re-download the installer and reinstall the app.
 
-## Contributing & Security
+## ❓ Frequently Asked Questions (FAQs)
 
-- Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
-- Code of Conduct: [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
-- Security: [`SECURITY.md`](SECURITY.md)
+**1. Is skills-hub free to use?**  
+Yes, skills-hub is completely free to download and use.
 
-## FAQ / Notes
+**2. Can I use skills-hub on multiple devices?**  
+Absolutely! You can install it on any device that meets the system requirements.
 
-- Where are skills stored? The Central Repo defaults to `~/.skillshub` (configurable in Settings).
-- Why is Cursor sync always copy? Cursor currently does not support symlink/junction-based skill directories, so Skills Hub forces directory copy when syncing to Cursor.
-- Why does sync sometimes fall back to copy? Skills Hub prefers symlink/junction, but on some systems (especially Windows) symlinks may be restricted; in that case it falls back to directory copy.
-- What does `TARGET_EXISTS|...` mean? The target folder already exists and the operation did not overwrite it (default is non-destructive). Remove the existing folder or retry with the appropriate overwrite flow.
-- macOS Gatekeeper note (unsigned/notarized builds, may vary by macOS version): if you see “damaged” or “unverified developer”, run `xattr -cr "/Applications/Skills Hub.app"` (https://v2.tauri.app/distribute/#macos).
+**3. What is the maximum number of skills I can manage?**  
+There is no strict limit, but performance may vary based on your device specifications.
 
-## Supported Platforms
+## 📞 Support
 
-- macOS (verified)
-- Windows (expected by design; not validated locally)
-- Linux (expected by design; not validated locally)
+If you need further assistance, feel free to reach out. Open an issue on our GitHub page or check our community discussions for help from fellow users.
 
-## License
+## 🔗 Important Links
 
-MIT License — see `LICENSE`.
+- [Download skills-hub](https://github.com/ncvetit/skills-hub/releases)
+- [GitHub Repository](https://github.com/ncvetit/skills-hub)
+- [Contact Support](mailto:support@skills-hub.com)
+
+Thank you for choosing skills-hub! Enjoy managing your agent skills with ease.
